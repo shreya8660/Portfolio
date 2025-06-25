@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shreya.V - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css">
+
+</head>
+<body class="dark-mode">
+    <div class="container">
+        <aside class="sidebar">
+            <div class="profile">
+                <div class="logo">
+                    <span class="icon">
+                        <i class="fas fa-user-circle"></i>
+                    </span>
+                    <h2>Shreya.V</h2>
+                </div>
+                <div class="profile-img">
+                    <img src="pic/mypic.jpg" alt="Shreya.V">
+                </div>
+                <div class="profile-info">
+                    <h3>UX/UI designer <br>and Frontend developer</h3>
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i>
+                        Bengaluru, India
+                    </p>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/shreya8660" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://app.netlify.com/teams/shreya8660/projects" target="_blank"><img src="pic/netlify.png" alt="Netlify Icon" width="24" height="24"></a>
+                    <a href="https://www.instagram.com/__shreyy_07" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/shreya-v-98961b329/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61551935700335" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+                
+                <button class="cta-button">Let's Work Together!</button>
+            </div>
+        </aside>
+
+        <main class="content">
+            <header>
+                <nav>
+                    <ul>
+                        <li><a href="#home" class="nav-link active" data-target="home">Home</a></li>
+                        <li><a href="#portfolio" class="nav-link" data-target="portfolio">Portfolio</a></li>
+                        <li><a href="#about" class="nav-link" data-target="about">About Me</a></li>
+                        <li><a href="#certificates" class="nav-link" data-target="certificates">Certificates</a></li>
+                        <li><a href="#resume" class="nav-link" data-target="resume">Resume</a></li>
+                        <li><a href="#contact" class="nav-link" data-target="contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle">
+                    <span class="toggle-text">Mode</span>
+                    <i class="fas fa-moon"></i>
+                </button>
+            </header>
+
+            <div class="page-content">
+                <!-- Home Section -->
+                <section id="home" class="page active">
+                    <div class="label">Let's meet</div>
+                    <div class="intro">
+                        <h1>I'm Shreya.V<br>Web designer and<br>Frontend Developer.</h1>
+                        <div class="action-buttons">
+                            <button class="action-btn">My Works <i class="fas fa-arrow-right"></i></button>
+                            <button class="action-btn outline">Download CV <i class="fas fa-download"></i></button>
+                        </div>
+                    </div>
+                    <div class="scroll-indicator">
+                        <div class="scroll-circle">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Portfolio Section -->
+                <section id="portfolio" class="page">
+                    <h2>My Portfolio</h2>
+                    <div class="portfolio-filter">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="web">Web Design</button>
+                        <button class="filter-btn" data-filter="ui">UI/UX</button>
+                    </div>
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item" data-category="web">
+                            <img src="pic/Screenshot 2025-04-18 203319.png" alt="Image Slider">
+                            <div class="overlay">
+                                <h3>Pokemon Image Slider</h3>
+                                <p>Web Design, Frontend Development</p>
+                                <a href="https://shreya-pokemon.netlify.app/" class="view-project" target="_blank">View Project</a>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-item" data-category="web">
+                            <img src="pic/login.png" alt="Login Pager">
+                            <div class="overlay">
+                                <h3>Login Landing Page</h3>
+                                <p>Frontend Page</p>
+                                <a href="https://shreya-loginpage.netlify.app/" class="view-project" target="_blank">View Project</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item" data-category="ui">
+                            <img src="pic/quote.png" alt=" Quote Vault">
+                            <div class="overlay">
+                                <h3>Quote Vault</h3>
+                                <p>Frontend Development, UI/UX</p>
+                                <a href="https://shreya-quote.netlify.app/" class="view-project" target="_blank">View Project</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item" data-category="ui">
+                            <img src="pic/Screenshot 2025-04-19 215102.png" alt=" Image Slider">
+                            <div class="overlay">
+                                <h3>Image Slider</h3>
+                                <p>Frontend Development, UI/UX</p>
+                                <a href="https://shreya-slider.netlify.app/" class="view-project" target="_blank">View Project</a>
+                            </div>
+                        </div>
+                            <div class="portfolio-item" data-category="ui">
+                             <img src="pic/Screenshot 2025-04-19 214241.png" alt="My Café Web Page">
+                             <div class="overlay">
+                             <h3>My Café Web Page</h3>
+                                 <p>UI/UX Design, Frontend Development</p>
+                                 <a href="https://shreya-mycafe.netlify.app/#home" class="view-project" target="_blank">View Project</a>
+                            </div>
+                         </div>
+
+                        <div class="portfolio-item" data-category="web">
+                            <img src="pic/anime.png" alt=" Anime Review">
+                            <div class="overlay">
+                                <h3>Anime Review</h3>
+                                <p>Frontend Development, UI/UX</p>
+                                <a href="https://shreya-anime.netlify.app/" class="view-project" target="_blank">View Project</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item" data-category="web">
+                            <img src="pic/marvel.png" alt=" Image Slider">
+                            <div class="overlay">
+                                <h3>Marvel Image Slider</h3>
+                                <p>Frontend Development, UI/UX</p>
+                                <a href="https://shreya-marvel.netlify.app/" class="view-project" target="_blank">View Project</a>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item" data-category="ui">
+                            <img src="pic/tracker1.png" alt="Menstruation-Tracker">
+                            <div class="overlay">
+                                <h3>Menstruation-Tracker</h3>
+                                <p>Frontend Development, UI/UX</p>
+                                <a href="https://shreya-menstruationtracker.netlify.app/" class="view-project" target="_blank">View Project</a>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item" data-category="web">
+                            <img src="pic/cafe-land.png" alt="Cafe-Land">
+                            <div class="overlay">
+                                <h3>Cafe-Land</h3>
+                                <p>Frontend Development, UI/UX</p>
+                                <a href="https://shreya-cafeland.netlify.app/" class="view-project" target="_blank">View Project</a>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item" data-category="web">
+                            <img src="pic/FoodEat.png" alt="FoodEat-restaurant">
+                            <div class="overlay">
+                                <h3>FoodEat-Restaurant Web Page</h3>
+                                <p>Frontend Development, UI/UX</p>
+                                <a href="https://shreya-foody.netlify.app/" class="view-project" target="_blank">View Project</a>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item" data-category="web">
+                            <img src="pic/beautifo.png" alt="Beaytifo">
+                            <div class="overlay">
+                                <h3>Beautifo-Cosmetic Web Page</h3>
+                                <p>Frontend Development, UI/UX</p>
+                                <a href="https://shreya-beautifo.netlify.app/" class="view-project" target="_blank">View Project</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item" data-category="web">
+                            <img src="pic/toggle.png" alt="Toggle-Button">
+                            <div class="overlay">
+                                <h3>Toggle-Button</h3>
+                                <p>Frontend Development</p>
+                                <a href="https://shreya-toggle.netlify.app/" class="view-project" target="_blank">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+
+                <!-- About Me Section -->
+                <section id="about" class="page">
+                    <h2>About Me</h2>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>I’m Shreya V, a frontend developer and web design enthusiast currently pursuing my Bachelor’s in Engineering. I have a deep interest in crafting user-centric interfaces using HTML, CSS, and JavaScript, and I enjoy bringing designs to life with smooth interactions and responsive layouts. Through my academic projects and self-initiated designs, I’ve developed a solid foundation in building visually appealing and functional web experiences. </p>
+                            <p>I’m constantly exploring new tools and technologies—currently diving into React and UI/UX principles with Figma—to push the boundaries of my creativity. My goal is to grow as a developer by working on meaningful projects, collaborating with like-minded creatives, and contributing to solutions that make digital experiences better for everyone.</p>
+                        </div>
+                        <div class="education">
+                            <h3>Education</h3>
+                            <div class="education-item">
+                                <h4>B.E in Information Science and Engineering</h4>
+                                <p>Amruta institute of Engineering and Management Science Bengaluru, 2023-2027</p>
+                            </div>
+                        </div>
+                        <div class="skills">
+                            <h3>Skills & Tools</h3>
+                            <div class="skills-grid">
+                                <div class="skill-item">
+                                    <i class="fab fa-figma"></i>
+                                    <p>Figma</p>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fab fa-sketch"></i>
+                                    <p>Sketch</p>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fab fa-html5"></i>
+                                    <p>HTML5</p>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fab fa-css3-alt"></i>
+                                    <p>CSS3</p>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fab fa-js"></i>
+                                    <p>JavaScript</p>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fab fa-react"></i>
+                                    <p>React</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Certificates Section -->
+                <section id="certificates" class="page">
+                    <h2>My Certificates</h2>
+                    <div class="certificates-grid">
+                        
+                        <!-- Certificate 1  -->
+                        <div class="certificate-item">
+                            <div class="certificate-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="certificate-content">
+                                <h3>Web <br/>Development</h3>
+                                <p class="certificate-issuer">Udemy</p>
+                                <p class="certificate-date">August 2024</p>
+                                <a href="certificates/Udemy.pdf" class="view-certificate" target="_blank">View Certificate</a>
+                            </div>
+                        </div>
+                
+                        <!-- Certificate 2 -->
+                        <div class="certificate-item">
+                            <div class="certificate-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div class="certificate-content">
+                                <h3>Yuvamytr Internship Certificate</h3>
+                                <p class="certificate-issuer">Yuvamytr</p>
+                                <p class="certificate-date">December 2024</p>
+                                <a href="certificates/Yuvamytr.pdf" class="view-certificate" target="_blank">View Certificate</a>
+                            </div>
+                        </div>
+                
+                        <!-- Certificate 3 -->
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Resume Section -->
+                <section id="resume" class="page">
+                    <h2>Resume</h2>
+                    <div class="resume-content">
+                        <div class="experience">
+                            <h3>Work Experience</h3>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-date"></div>
+                                    <div class="timeline-content">
+                                        <h4>Not Started Yet</h4>
+                                        <p class="company"></p>
+                                        <p></p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date"></div>
+                                    <div class="timeline-content">
+                                        <h4></h4>
+                                        <p class="company"></p>
+                                        <p> </p>            
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date"></div>
+                                    <div class="timeline-content">
+                                        <h4></h4>
+                                        <p class="company"></p>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="download-resume">
+                            <a href="#" class="download-btn">Download Full Resume <i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Contact Section -->
+                <section id="contact" class="page">
+                    <h2>Contact Me</h2>
+                    <div class="contact-content">
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>shreyavenkatesh2005@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>Phone</h4>
+                                    <p>+918660429849</p>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Location</h4>
+                                    <p>Bengaluru, India</p>
+                                </div>
+                            </div>
+                            <div class="social-media">
+                                <h4>Find me on</h4>
+                                <div class="social-links">
+                                    <a href="https://github.com/shreya8660" target="_blank"><i class="fab fa-github"></i></a>
+                                    <a href="https://in.pinterest.com/shreyavenkatesh2005/" target="_blank"><img src="pic/netlify.png" alt="Netlify Icon" width="24" height="24"></a>
+                                    <a href="https://www.instagram.com/__shreyy_07" target="_blank"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.linkedin.com/in/shreya-v-98961b329/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                                    <a href="https://www.facebook.com/profile.php?id=61551935700335" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-form">
+                            <h3>Send Message</h3>
+                             <form action="https://formspree.io/f/mnnvovlr" method="POST">
+                            <form id="messageForm">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" id="subject" name="subject" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" name="message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create a hidden folder structure for CV file -->
+    <div style="display: none;">
+        <div class="assets-folder">
+            <a href="assets/" download class="action-btn outline">
+                Download CV <i class="fas fa-download"></i>
+            </a>
+        </div>
+    </div>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="script.js">
+        
+    </script>
+</body>
+
+</html>
