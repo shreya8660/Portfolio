@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollIndicator = document.querySelector('.scroll-circle');
     if (scrollIndicator) {
         scrollIndicator.addEventListener('click', () => {
-            const portfolioSection = document.getElementById('portfolio');
+            const portfolioSection = document.getElementById('about');
             const header = document.querySelector('header');
             const headerHeight = header.offsetHeight;
             const targetPosition = portfolioSection.offsetTop - headerHeight;
