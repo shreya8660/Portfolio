@@ -723,12 +723,14 @@ body.light-mode .education-item p {
 
 
 body.dark-mode .skill-item {
-    background-color:#7952b3;
+    background-color: #bb86fc;
+    color: #121212;
 }
 
 body.light-mode .skill-item {
-    background-color: #bb86fc;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background-color:#7952b3;
+    color: white;
+    
 }
 
 .skill-item:hover {
