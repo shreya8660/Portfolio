@@ -32,10 +32,15 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--font-family);
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
+    overflow-x: hidden;
 }
 
 body.dark-mode {
@@ -74,7 +79,7 @@ button {
     min-height: 100vh;
 }
 
-/* Sidebar */
+/* Sidebar - Fixed */
 .sidebar {
     width: 300px;
     padding: 2rem;
@@ -82,6 +87,9 @@ button {
     height: 100vh;
     overflow-y: auto;
     transition: background-color 0.3s;
+    z-index: 100;
+    left: 0;
+    top: 0;
 }
 
 body.dark-mode .sidebar {
@@ -229,11 +237,10 @@ body.light-mode .cta-button {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Content Area */
+/* Content Area - Scrollable */
 .content {
     flex: 1;
     margin-left: 300px;
-    padding: 2rem;
     transition: background-color 0.3s;
 }
 
@@ -245,12 +252,41 @@ body.light-mode .content {
     background-color: var(--light-bg);
 }
 
-/* Header & Navigation */
+
+/* Header & Navigation - Fixed */
 header {
+    position: fixed;
+    top: 0;
+    left: 300px;
+    right: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3rem;
+    padding: 2rem;
+    z-index: 99;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+body.dark-mode header {
+    background-color: var(--dark-bg);
+}
+
+body.light-mode header {
+    background-color: var(--light-bg);
+}
+
+header.scrolled {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode header.scrolled {
+    background-color: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+body.light-mode header.scrolled {
+    background-color: rgba(248, 249, 250, 0.95);
+    backdrop-filter: blur(10px);
 }
 
 nav ul {
@@ -264,6 +300,7 @@ nav ul {
     position: relative;
     padding: 0.5rem 0;
     transition: color 0.3s;
+    cursor: pointer;
 }
 
 body.dark-mode .nav-link {
@@ -322,19 +359,22 @@ body.light-mode .theme-toggle {
     transform: translateY(-2px);
 }
 
-/* Page Content */
+/* Page Content - Scrollable Sections */
+.page-content {
+    padding-top: 100px; /* Account for fixed header */
+}
+
 .page {
-    display: none;
-    animation: fadeIn 0.5s ease-in-out;
+    min-height: 100vh;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.page.active {
-    display: block;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.page.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 h2 {
@@ -367,6 +407,8 @@ body.light-mode h2::after {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
 
 body.dark-mode .label {
@@ -385,14 +427,16 @@ body.light-mode .label {
     font-size: 3.5rem;
     line-height: 1.2;
     margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
 }
-
 
 .action-buttons {
     display: flex;
     gap: 1rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
 }
-
 
 .action-btn {
     padding: 0.75rem 1.5rem;
@@ -421,12 +465,12 @@ body.light-mode .action-btn {
 
 body.dark-mode .action-btn.outline {
     border-color: var(--dark-accent);
-    color: #121212;
+    color: var(--dark-accent);
 }
 
 body.light-mode .action-btn.outline {
     border-color: var(--light-accent);
-    color: white;
+    color: var(--light-accent);
 }
 
 .action-btn:hover {
@@ -437,6 +481,8 @@ body.light-mode .action-btn.outline {
 .scroll-indicator {
     text-align: center;
     margin-top: 4rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.8s forwards;
 }
 
 .scroll-circle {
@@ -447,6 +493,7 @@ body.light-mode .action-btn.outline {
     align-items: center;
     justify-content: center;
     animation: bounce 2s infinite;
+    cursor: pointer;
 }
 
 body.dark-mode .scroll-circle {
@@ -457,6 +504,17 @@ body.dark-mode .scroll-circle {
 body.light-mode .scroll-circle {
     background-color: var(--light-border);
     color: var(--light-text);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes bounce {
@@ -514,6 +572,14 @@ body.light-mode .filter-btn:hover {
     border-radius: 10px;
     overflow: hidden;
     height: 200px;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.portfolio-item.visible {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .portfolio-item img {
@@ -611,6 +677,8 @@ body.light-mode .view-project {
     margin-bottom: 1.5rem;
 }
 
+
+
 .education-item {
     margin-bottom: 1.5rem;
 }
@@ -643,14 +711,23 @@ body.light-mode .education-item p {
     padding: 1rem;
     border-radius: 10px;
     transition: transform 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
 }
 
+.skill-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+
 body.dark-mode .skill-item {
-    background-color: var(--dark-surface);
+    background-color:#7952b3;
 }
 
 body.light-mode .skill-item {
-    background-color: var(--light-surface);
+    background-color: #bb86fc;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
@@ -958,97 +1035,6 @@ body.light-mode .submit-btn {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive Styles */
-@media (max-width: 1200px) {
-    .contact-content {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 992px) {
-    .sidebar {
-        width: 250px;
-    }
-    
-    .content {
-        margin-left: 250px;
-    }
-    
-    .intro h1 {
-        font-size: 2.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-    
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 1.5rem;
-    }
-    
-    .profile {
-        display: flex;
-        flex-wrap: wrap;
-    }
-    
-    .logo {
-        width: 100%;
-    }
-    
-    .profile-img {
-        width: 30%;
-        margin-bottom: 0;
-    }
-    
-    .profile-info {
-        width: 70%;
-        padding-left: 1rem;
-    }
-    
-    .social-links, .cta-button {
-        width: 100%;
-    }
-    
-    .content {
-        margin-left: 0;
-        padding: 1.5rem;
-    }
-    
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-    
-    nav ul {
-        flex-wrap: wrap;
-    }
-    
-    .theme-toggle {
-        align-self: flex-end;
-    }
-    
-    .intro h1 {
-        font-size: 2rem;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .action-btn {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-
 /* Certificates Section */
 .certificates-grid {
     display: grid;
@@ -1061,6 +1047,14 @@ body.light-mode .submit-btn {
     padding: 1.5rem;
     border-radius: 10px;
     transition: transform 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.certificate-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
 body.dark-mode .certificate-item {
@@ -1150,270 +1144,113 @@ body.light-mode .view-certificate {
     transform: translateY(-2px);
 }
 
-/* Responsive adjustments for certificates section */
-@media (max-width: 768px) {
-    .certificates-grid {
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .contact-content {
         grid-template-columns: 1fr;
     }
 }
-/* Project Detail Overlay */
-.project-detail-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
-}
 
-.project-detail-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.project-detail-container {
-    width: 90%;
-    max-width: 900px;
-    max-height: 90vh;
-    overflow-y: auto;
-    border-radius: 10px;
-    padding: 2rem;
-}
-
-body.dark-mode .project-detail-container {
-    background-color: var(--dark-surface);
-    color: var(--dark-text);
-}
-
-body.light-mode .project-detail-container {
-    background-color: var(--light-surface);
-    color: var(--light-text);
-}
-
-.project-detail-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.project-detail-header h2 {
-    margin: 0;
-}
-
-.close-btn {
-    background: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-body.dark-mode .close-btn {
-    color: var(--dark-text);
-}
-
-body.light-mode .close-btn {
-    color: var(--light-text);
-}
-
-.close-btn:hover {
-    transform: rotate(90deg);
-}
-
-.project-image {
-    margin-bottom: 1.5rem;
-}
-
-.project-image img {
-    width: 100%;
-    border-radius: 8px;
-}
-
-.project-description {
-    margin-bottom: 1.5rem;
-}
-
-.project-technologies {
-    margin-bottom: 1.5rem;
-}
-
-.project-technologies h4 {
-    margin-bottom: 0.5rem;
-}
-
-.project-technologies ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.project-technologies li {
-    padding: 0.25rem 1rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-}
-
-body.dark-mode .project-technologies li {
-    background-color: var(--dark-bg);
-}
-
-body.light-mode .project-technologies li {
-    background-color: var(--light-bg);
-}
-
-.project-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.demo-link, .github-link {
-    padding: 0.75rem 1.5rem;
-    border-radius: 30px;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s;
-}
-
-body.dark-mode .demo-link {
-    background-color: var(--dark-accent);
-    color: var(--dark-bg);
-}
-
-body.light-mode .demo-link {
-    background-color: var(--light-accent);
-    color: var(--light-surface);
-}
-
-body.dark-mode .github-link {
-    background-color: transparent;
-    border: 1px solid var(--dark-accent);
-    color: var(--dark-accent);
-}
-
-body.light-mode .github-link {
-    background-color: transparent;
-    border: 1px solid var(--light-accent);
-    color: var(--light-accent);
-}
-
-.demo-link:hover, .github-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Certificate Modal */
-.certificate-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
-}
-
-.certificate-modal.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.certificate-modal-container {
-    width: 90%;
-    max-width: 800px;
-    max-height: 90vh;
-    overflow-y: auto;
-    border-radius: 10px;
-    padding: 2rem;
-}
-
-body.dark-mode .certificate-modal-container {
-    background-color: var(--dark-surface);
-    color: var(--dark-text);
-}
-
-body.light-mode .certificate-modal-container {
-    background-color: var(--light-surface);
-    color: var(--light-text);
-}
-
-.certificate-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.certificate-modal-header h3 {
-    margin: 0;
-}
-
-.certificate-image {
-    margin-bottom: 1.5rem;
-}
-
-.certificate-image img {
-    width: 100%;
-    border-radius: 8px;
-}
-
-.certificate-details {
-    margin-bottom: 1rem;
-}
-
-.certificate-details p {
-    margin-bottom: 0.5rem;
-}
-
-.verify-link {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 30px;
-    margin-top: 1rem;
-    transition: all 0.3s;
-}
-
-body.dark-mode .verify-link {
-    background-color: var(--dark-accent);
-    color: var(--dark-bg);
-}
-
-body.light-mode .verify-link {
-    background-color: var(--light-accent);
-    color: var(--light-surface);
-}
-
-.verify-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive Styles for Modals */
-@media (max-width: 768px) {
-    .project-detail-container,
-    .certificate-modal-container {
-        padding: 1.5rem;
+@media (max-width: 992px) {
+    .sidebar {
+        width: 250px;
     }
     
-    .project-links {
+    .content {
+        margin-left: 250px;
+    }
+
+    header {
+        left: 250px;
+    }
+    
+    .intro h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
         flex-direction: column;
     }
     
-    .demo-link, .github-link, .verify-link {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 1.5rem;
+    }
+    
+    .profile {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .logo {
+        width: 100%;
+    }
+    
+    .profile-img {
+        width: 30%;
+        margin-bottom: 0;
+    }
+    
+    .profile-info {
+        width: 70%;
+        padding-left: 1rem;
+    }
+    
+    .social-links, .cta-button {
+        width: 100%;
+    }
+    
+    .content {
+        margin-left: 0;
+    }
+
+    header {
+        position: relative;
+        left: 0;
+        padding: 1.5rem;
+    }
+
+    .page-content {
+        padding-top: 0;
+    }
+
+    .page {
+        padding: 1.5rem;
+    }
+    
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    nav ul {
+        flex-wrap: wrap;
+    }
+    
+    .theme-toggle {
+        align-self: flex-end;
+    }
+    
+    .intro h1 {
+        font-size: 2rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .action-btn {
         width: 100%;
         justify-content: center;
+    }
+
+    .certificates-grid {
+        grid-template-columns: 1fr;
     }
 }

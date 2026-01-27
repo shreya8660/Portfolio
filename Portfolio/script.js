@@ -1,60 +1,3 @@
-// Router Class
-class Router {
-    constructor(routes) {
-        this.routes = routes;
-        this.currentPage = null;
-        
-        // Add event listeners
-        window.addEventListener('hashchange', this.hashChanged.bind(this));
-        document.addEventListener('DOMContentLoaded', this.hashChanged.bind(this));
-        
-        // Setup navigation links
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = link.getAttribute('data-target');
-                this.navigateTo(target);
-            });
-        });
-    }
-    
-    hashChanged() {
-        // Get the hash from the URL (remove the # symbol)
-        const hash = window.location.hash.substring(1) || 'home';
-        this.navigateTo(hash);
-    }
-    
-    navigateTo(route) {
-        // Update URL hash
-        window.location.hash = route;
-        
-        // Hide all pages
-        const pages = document.querySelectorAll('.page');
-        pages.forEach(page => {
-            page.classList.remove('active');
-        });
-        
-        // Show the target page
-        const targetPage = document.getElementById(route);
-        if (targetPage) {
-            targetPage.classList.add('active');
-            this.currentPage = route;
-            
-            // Update nav links
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                const linkTarget = link.getAttribute('data-target');
-                if (linkTarget === route) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        }
-    }
-}
-
 // Theme Manager Class
 class ThemeManager {
     constructor() {
@@ -94,6 +37,137 @@ class ThemeManager {
     }
 }
 
+// Smooth Scroll Navigation Class
+class SmoothScrollNavigation {
+    constructor() {
+        this.navLinks = document.querySelectorAll('.nav-link');
+        this.sections = document.querySelectorAll('.page');
+        this.header = document.querySelector('header');
+        
+        this.setupNavigation();
+        this.setupScrollSpy();
+        this.setupHeaderScroll();
+    }
+    
+    setupNavigation() {
+        this.navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('data-target');
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    const headerHeight = this.header.offsetHeight;
+                    const targetPosition = targetSection.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    }
+    
+    setupScrollSpy() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -80% 0px',
+            threshold: 0
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.getAttribute('id');
+                    this.updateActiveNav(sectionId);
+                }
+            });
+        }, observerOptions);
+        
+        this.sections.forEach(section => {
+            observer.observe(section);
+        });
+    }
+    
+    updateActiveNav(sectionId) {
+        this.navLinks.forEach(link => {
+            const targetId = link.getAttribute('data-target');
+            if (targetId === sectionId) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+    
+    setupHeaderScroll() {
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                this.header.classList.add('scrolled');
+            } else {
+                this.header.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+    }
+}
+
+// Scroll Animations Class
+class ScrollAnimations {
+    constructor() {
+        this.animateOnScroll();
+    }
+    
+    animateOnScroll() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe sections
+        const sections = document.querySelectorAll('.page');
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Observe portfolio items with stagger effect
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        portfolioItems.forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(item);
+        });
+        
+        // Observe skill items with stagger effect
+        const skillItems = document.querySelectorAll('.skill-item');
+        skillItems.forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(item);
+        });
+        
+        // Observe certificate items with stagger effect
+        const certificateItems = document.querySelectorAll('.certificate-item');
+        certificateItems.forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(item);
+        });
+    }
+}
+
 // Portfolio Filter Class
 class PortfolioFilter {
     constructor() {
@@ -116,12 +190,20 @@ class PortfolioFilter {
         // Get filter value
         const filter = e.target.getAttribute('data-filter');
         
-        // Show/hide items based on filter
-        this.portfolioItems.forEach(item => {
+        // Show/hide items based on filter with animation
+        this.portfolioItems.forEach((item, index) => {
             if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                item.style.display = 'block';
+                setTimeout(() => {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, 10);
+                }, index * 50);
             } else {
-                item.style.display = 'none';
+                item.classList.remove('visible');
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 300);
             }
         });
     }
@@ -153,7 +235,6 @@ class CertificateInteractions {
     }
 }
 
-
 // Contact Form Class
 class ContactForm {
     constructor() {
@@ -184,28 +265,27 @@ class ContactForm {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Define routes
-    const routes = [
-        { path: 'home', element: document.getElementById('home') },
-        { path: 'portfolio', element: document.getElementById('portfolio') },
-        { path: 'about', element: document.getElementById('about') },
-        { path: 'certificates', element: document.getElementById('certificates') },
-        { path: 'resume', element: document.getElementById('resume') },
-        { path: 'contact', element: document.getElementById('contact') }
-    ];
-    
     // Initialize classes
-    const router = new Router(routes);
     const themeManager = new ThemeManager();
+    const smoothScrollNavigation = new SmoothScrollNavigation();
+    const scrollAnimations = new ScrollAnimations();
     const portfolioFilter = new PortfolioFilter();
     const certificateInteractions = new CertificateInteractions();
     const contactForm = new ContactForm();
     
-    // Handle "My Works" button click - direct to portfolio section
+    // Handle "My Works" button click - scroll to portfolio section
     const myWorksBtn = document.querySelector('.action-btn:first-child');
     if (myWorksBtn) {
         myWorksBtn.addEventListener('click', () => {
-            router.navigateTo('portfolio');
+            const portfolioSection = document.getElementById('portfolio');
+            const header = document.querySelector('header');
+            const headerHeight = header.offsetHeight;
+            const targetPosition = portfolioSection.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
         });
     }
     
@@ -231,49 +311,71 @@ document.addEventListener('DOMContentLoaded', () => {
             // Create link to CV file (same as above)
             const link = document.createElement('a');
             link.href = 'assets/Shreya_V_CV.pdf'; // Path to your CV file
-            link.download = 'Shreya_V_CV.pdf'; //  name for the downloaded file
+            link.download = 'Shreya_V_CV.pdf'; // Name for the downloaded file
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         });
     }
     
-    // Add animation for CTA button
+    // Add animation for CTA button - scroll to contact
     const ctaButton = document.querySelector('.cta-button');
     if (ctaButton) {
         ctaButton.addEventListener('click', () => {
-            router.navigateTo('contact');
+            const contactSection = document.getElementById('contact');
+            const header = document.querySelector('header');
+            const headerHeight = header.offsetHeight;
+            const targetPosition = contactSection.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
         });
     }
     
-    // Add animation for scroll indicator
+    // Add animation for scroll indicator - scroll to next section
     const scrollIndicator = document.querySelector('.scroll-circle');
     if (scrollIndicator) {
         scrollIndicator.addEventListener('click', () => {
-            router.navigateTo('portfolio');
+            const portfolioSection = document.getElementById('portfolio');
+            const header = document.querySelector('header');
+            const headerHeight = header.offsetHeight;
+            const targetPosition = portfolioSection.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
         });
     }
+    
+    // Make first section visible immediately
+    const firstSection = document.querySelector('.page');
+    if (firstSection) {
+        firstSection.classList.add('visible');
+    }
 });
-// Initialize EmailJS with your Public Key
 
-  const form = document.querySelector("form");
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const data = new FormData(form);
-    fetch(form.action, {
-      method: "POST",
-      body: data,
-      headers: {
-        'Accept': 'application/json'
-      }
-    }).then(response => {
-      if (response.ok) {
-        alert("Thank you! Your message has been sent.");
-        form.reset();
-      } else {
-        alert("Oops! There was a problem.");
-      }
+// Form submission handler
+const form = document.querySelector("form");
+if (form) {
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const data = new FormData(form);
+        fetch(form.action, {
+            method: "POST",
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                alert("Thank you! Your message has been sent.");
+                form.reset();
+            } else {
+                alert("Oops! There was a problem.");
+            }
+        });
     });
-  });
-
-
+}
