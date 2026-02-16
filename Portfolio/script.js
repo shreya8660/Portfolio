@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Handle "Download CV" button click
-    const downloadCVBtn = document.querySelector('.action-btn.outline');
+    const downloadCVBtn = document.querySelector('.action-btn');
     if (downloadCVBtn) {
         downloadCVBtn.addEventListener('click', () => {
             // Create link to CV file
