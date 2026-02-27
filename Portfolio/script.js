@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadCVBtn.addEventListener('click', () => {
             // Create link to CV file
             const link = document.createElement('a');
-            link.href = 'assets/Shreya_V_CV.pdf'; // Path to your CV file
+            link.href = 'assets/Shreya_CV.pdf'; // Path to your CV file
             link.download = 'Shreya_V_CV.pdf'; // Name for the downloaded file
             document.body.appendChild(link);
             link.click();
